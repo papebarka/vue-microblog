@@ -6,6 +6,10 @@ import Card from './components/Card.vue'
 import Controls from './components/Controls.vue'
 
 
+const setHashtag = ($event) => {
+  store.setHashtag($event.target.value)
+}
+
 const filteredPosts = computed(() => {
   if (!store.state.currentTag){
     return store.state.posts
@@ -14,9 +18,15 @@ const filteredPosts = computed(() => {
     post => post.hashtags.includes(store.state.currentTag)
   )
 })
+
+const currentTag = computed(() => store.state.currentTag)
 </script>
 
 <template>
+  <input type="text"
+    :value="currentTag"
+    @input="setHashtag"
+    >
   <card
     v-for="post in filteredPosts"
     :key="post.id">
