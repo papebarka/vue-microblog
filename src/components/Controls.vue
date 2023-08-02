@@ -11,7 +11,7 @@ const props = defineProps({
 })
 
 const likePost = () => {
-    store.likePost(props.post.id)
+    store.likePost(props.post)
 }
 
 </script>

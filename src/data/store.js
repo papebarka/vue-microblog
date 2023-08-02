@@ -13,12 +13,9 @@ class Store{
         this.state.currentTag = tag
     }
 
-    likePost(id){
-        this.state.posts.forEach((post) => {
-            if (post.id == id){
-                post.likes++
-            }
-        })
+    likePost(post){
+        const rightPost = this.state.posts.find( x => x.id === post.id)
+        rightPost.likes += 1
     }
 }
 
