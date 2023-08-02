@@ -1,5 +1,6 @@
 <script setup>
-const emit = defineEmits(['setHashtag'])
+import { store } from '../data/store.js'
+
 const props = defineProps({
     hashtag: {
         type: String,
@@ -9,7 +10,7 @@ const props = defineProps({
 
 const setHashtag = () => {
     //console.log('Inside Hashtag')
-    emit('setHashtag', props.hashtag)
+    store.setHashtag(props.hashtag)
 }
 </script>
 

@@ -1,23 +1,17 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { store } from './data/store.js'
 
 import Card from './components/Card.vue'
 import Controls from './components/Controls.vue'
 
-const currentTag =  ref()
-
-const setHashtag = (hashtag) => {
-  //console.log('Heelloo')
-  currentTag.value = hashtag
-}
 
 const filteredPosts = computed(() => {
-  if (!currentTag.value){
+  if (!store.state.currentTag){
     return store.state.posts
   }
   return store.state.posts.filter(
-    post => post.hashtags.includes(currentTag.value)
+    post => post.hashtags.includes(store.state.currentTag)
   )
 })
 </script>
@@ -35,10 +29,7 @@ const filteredPosts = computed(() => {
     </template>
 
     <template v-slot:description>
-      <controls
-        :post="post"
-        @setHashtag="setHashtag"
-      />
+      <controls :post="post"/>
     </template>
   </card>
 </template>

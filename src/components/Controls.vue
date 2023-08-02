@@ -1,6 +1,7 @@
 <script setup>
 import Hashtag from './Hashtag.vue'
-const emit = defineEmits(['setHashtag'])
+
+//const emit = defineEmits(['setHashtag'])
 defineProps({
     post: {
         type: Object,
@@ -8,10 +9,6 @@ defineProps({
     }
 })
 
-const setHashtag = (hashtag) => {
-    //console.log('inside controls')
-    emit('setHashtag', hashtag)
-}
 </script>
 
 <template>
@@ -21,7 +18,6 @@ const setHashtag = (hashtag) => {
         v-for="hashtag in post.hashtags"
         :key="hashtag" 
         :hashtag="hashtag"
-        @setHashtag="setHashtag"
     />
 </template>
 
