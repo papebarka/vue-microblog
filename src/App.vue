@@ -1,20 +1,46 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { ref, computed } from 'vue'
+import { store } from './data/store.js'
+
+import Card from './components/Card.vue'
+import Controls from './components/Controls.vue'
+
+const currentTag =  ref()
+
+const setHashtag = (hashtag) => {
+  //console.log('Heelloo')
+  currentTag.value = hashtag
+}
+
+const filteredPosts = computed(() => {
+  if (!currentTag.value){
+    return store.state.posts
+  }
+  return store.state.posts.filter(
+    post => post.hashtags.includes(currentTag.value)
+  )
+})
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <card
+    v-for="post in filteredPosts"
+    :key="post.id">
+    <template v-slot:title>
+      {{ post.title }}
+    </template>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+    <template v-slot:content>
+      {{ post.content }}
+    </template>
 
-  <main>
-    <TheWelcome />
-  </main>
+    <template v-slot:description>
+      <controls
+        :post="post"
+        @setHashtag="setHashtag"
+      />
+    </template>
+  </card>
 </template>
 
 <style scoped>
