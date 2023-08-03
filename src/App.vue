@@ -10,14 +10,7 @@ const setHashtag = ($event) => {
   store.setHashtag($event.target.value)
 }
 
-const filteredPosts = computed(() => {
-  if (!store.state.currentTag){
-    return store.state.posts
-  }
-  return store.state.posts.filter(
-    post => post.hashtags.includes(store.state.currentTag)
-  )
-})
+const filteredPosts = computed(() => store.filteredPosts)
 
 const currentTag = computed(() => store.state.currentTag)
 </script>
